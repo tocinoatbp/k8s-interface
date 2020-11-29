@@ -7,29 +7,17 @@ import (
 )
 
 func main() {
-// add handle route for static folders
+// add route for static files
 	fileServer := http.FileServer(http.Dir("./static"))
 	http.Handle("/", fileServer)
 
+
+// add route to endpoint
 	http.HandleFunc("/hello", helloHandler )
 	
+// Run webserver
 	fmt.Printf("Starting server at port 8080\n")
 	if err := http.ListenAndServe(":8080", nil); err != nil {
 		log.Fatal(err)
 	}
-}
-// handler security
-func helloHandler(w http.ResponseWriter, r *http.Request) {
-	if r.URL.Path != "/hello" {
-		http.Error(w, "asan display neto", http.StatusNotFound )
-		return
-	}
-
-	if r.Method != "GET" {
-		http.Error(w, "Method is not Supported", http.StatusNotFound )
-		return
-	}
-
-	fmt.Fprintf(w, "Hello!")
-	
 }
