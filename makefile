@@ -1,7 +1,10 @@
 PROJECT=webserver
 
-d-build:
+dBuild:
 	docker build . -t ${PROJECT}
 
-d-run:
-	docker run -p 8081:8080 ${PROJECT}
+dRun:
+	docker run -d --name webserver -p 8081:8080  ${PROJECT}
+
+dStop:
+	docker stop  webserver
