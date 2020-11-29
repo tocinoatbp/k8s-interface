@@ -7,6 +7,10 @@ import (
 )
 
 func main() {
+// add handle route for static folders
+	fileServer := http.FileServer(http.Dir("./static"))
+	http.Handle("/", fileServer)
+
 	http.HandleFunc("/hello", helloHandler )
 	
 	fmt.Printf("Starting server at port 8080\n")

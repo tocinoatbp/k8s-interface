@@ -5,10 +5,9 @@
 <script>
 $(document).ready(function(){
   $("button").click(function(){
-    $.ajax({url: "http://localhost:8080/hello",
-      dataType: "jsonp",
+    $.ajax({url: "http://localhost:8080/hello", dataType: "jsonp,",
       success: function(result){
-        $("#div1").html(result);
+      $("#div1").html(result);
     }});
   });
 });
@@ -18,7 +17,7 @@ $(document).ready(function(){
 
 <div id="div1"><h2>Let jQuery AJAX Change This Text</h2></div>
 
-<button>Get External Content</button>
+<button>Get Message from web server</button>
 
 </body>
 </html>
