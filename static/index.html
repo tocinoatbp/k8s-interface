@@ -1,23 +1,54 @@
 <!DOCTYPE html>
 <html>
 <head>
+</head>
+<body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 $(document).ready(function(){
-  $("button").click(function(){
-    $.ajax({url: "http://localhost:8080/hello", success: function(result){
+  // Topic: CSS selectors
+
+  // 1. Class selectors "."
+  // $("#namespace").hide();
+  // 2. ID selectors "#"
+  $("#test").click(function(event){
+    event.preventDefault();
+
+    console.log("Pressed test button")
+    const url = "http://localhost:8080/hello"
+    
+    const successCallback = function(result){
       $("#div1").html(result);
-    }});
+    }
+
+    // Objective: Get form data into a JS Object
+    const form = document.querySelector('#k8s');
+    // const dataToPass = Object.fromEntries(new FormData(form).entries());
+
+    const dataToPass = { namespace: "hello", pod_name: "world" };
+    console.log(dataToPass);
+
+    $.post(url, dataToPass, successCallback, "json");
   });
 });
 </script>
-</head>
-<body>
+<h1> Kubernetes Interface </h1>
+<div id=div1>CHANGE THIS TEXT</div>
+<button id=test>change me</button>
 
-<div id="div0"><h2>Restart Pod</h2></div>
-<div id="div1"><h2>AJAX will change this text when button is pressed</h2></div>
 
-<button>PRESS ME!</button>
+
+<form id=k8s method="POST">
+  <b>Input namespace</b><br>
+  <input class="input-field" id="namespace" type="text" name="namespace">
+  <button id="list"> Enter </button>
+
+  <b>Enter pod name</b>
+  <input class="input-field" type="text" name="pod_name" />
+  <button>Restart</button>
+</form>
+
+
 
 </body>
 </html>
